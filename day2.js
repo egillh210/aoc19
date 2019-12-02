@@ -7,25 +7,15 @@ const runprogram = input => (noun, verb) => {
 
     for(let i=0; i<=arr.length; i += 4) {
         const opcode = arr[i];
+        if(opcode === 99) break;
         const input1 = arr[arr[i+1]];
         const input2 = arr[arr[i+2]];
-        if(opcode === 1) {
-            const res = input1+input2;
-            arr[arr[i+3]] = res;
-        }
-        if(opcode === 2) {
-            const res = input1 * input2
-            arr[arr[i+3]] = res;
-        }
-        if(opcode === 99) break;
+        arr[arr[i+3]] = opcode === 1 ? input1 + input2 : input1 * input2
     }
-
     return arr[0];
 }
 
 const run = runprogram(input.split(',').map(Number))
-
-const part1 = run(12, 2)
 
 const part2 = output => {
     let nums = Array(100).fill(0).map((v,i) => i);
@@ -39,7 +29,7 @@ const part2 = output => {
     }
 }
 
-const result1 = part1;
+const result1 = run(12, 2)
 const result2 = part2(19690720)
 
 console.log(result1, result2);
